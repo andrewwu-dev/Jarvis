@@ -27,6 +27,7 @@ class PlayMusic:
             q=song,
             type="video"
         )
+
         response = request.execute()
 
         res = {
@@ -34,6 +35,21 @@ class PlayMusic:
             "title": response["items"][0]['snippet']['title'],
             "channel": response["items"][0]['snippet']['channelTitle']
         }
+
+        extraInfo = youtube.videos().list(
+            part='contentDetails',
+            id=res['videoId'],
+            fields='items'
+        )
+
+        rawDuration = extraInfo.execute()['items'][0]['contentDetails']['duration']
+        m = rawDuration.find('M')
+        s = rawDuration.find('S')
+        minute = rawDuration[m - 1: m]
+        second = rawDuration[s - 2: s]
+        res['duration'] = int(minute) * 60 + int(second)
+
+        
         youtubeUrl = self.url + res['videoId']
         vidUrl = pafy.new(youtubeUrl).getbest().url
         self.media = vlc.MediaPlayer(vidUrl)
@@ -41,8 +57,10 @@ class PlayMusic:
         print (self.media.get_state())
 	
         print (res)
+        return res
 
     def stop(self):
 	    self.media.stop()
         
-PlayMusic().play("sparks fly")
+r = PlayMusic().play("sparks fly")
+time.sleep(r['duration'])
