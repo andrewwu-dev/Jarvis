@@ -8,6 +8,8 @@ class PlayMusic:
         keyFile = open('key.txt', 'r')
         if keyFile.mode == 'r':
             self.key = keyFile.read()
+        assert self.key
+        print(self.key)
         self.url = "https://www.youtube.com/watch?v="
         self.media = None
         
@@ -33,7 +35,7 @@ class PlayMusic:
             "channel": response["items"][0]['snippet']['channelTitle']
         }
         youtubeUrl = self.url + res['videoId']
-        vidUrl = pafy.new(url).getbest().url
+        vidUrl = pafy.new(youtubeUrl).getbest().url
         self.media = vlc.MediaPlayer(vidUrl)
         self.media.play()
         print (self.media.get_state())
