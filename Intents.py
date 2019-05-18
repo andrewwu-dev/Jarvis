@@ -1,9 +1,11 @@
-import Weather
+import Weather, PlayMusic
 
 weather = Weather.Weather()
+playMusic = PlayMusic.PlayMusic()
 
 intentMap = {
-    "weather": weather
+    "weather": weather,
+    "playMusic": playMusic
 }
 
 intentMap['weather']
