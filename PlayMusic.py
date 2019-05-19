@@ -59,5 +59,3 @@ class PlayMusic:
 
     def stop(self):
 	    self.media.stop()
-        
-r = PlayMusic().play("close to me")

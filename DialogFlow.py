@@ -29,7 +29,6 @@ class DialogFlow:
                 }
                 return norm
 
-
-res = DialogFlow().detect_intent("Jarvis, play close to me")
-song = res['entities'].fields['song'].string_value
-Intents.intentMap[res['intent']].play(song)
+#res = DialogFlow().detect_intent("play sparks fly")
+#song = res['entities'].fields['song'].string_value
+#Intents.intentMap[res['intent']].play(song)
