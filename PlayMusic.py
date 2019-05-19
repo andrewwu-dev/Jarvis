@@ -9,7 +9,6 @@ class PlayMusic:
         if keyFile.mode == 'r':
             self.key = keyFile.read()
         assert self.key
-        print(self.key)
         self.url = "https://www.youtube.com/watch?v="
         self.media = None
         
@@ -23,7 +22,7 @@ class PlayMusic:
         request = youtube.search().list(
             part="snippet",
             maxResults=1,
-            order="viewCount",
+            order="relevance",
             q=song,
             type="video"
         )
@@ -46,21 +45,19 @@ class PlayMusic:
         m = rawDuration.find('M')
         s = rawDuration.find('S')
         minute = rawDuration[m - 1: m]
-        second = rawDuration[s - 2: s]
+        second = rawDuration[m + 1 :s]
         res['duration'] = int(minute) * 60 + int(second)
 
         
         youtubeUrl = self.url + res['videoId']
         vidUrl = pafy.new(youtubeUrl).getbest().url
         self.media = vlc.MediaPlayer(vidUrl)
-        self.media.play()
-        print (self.media.get_state())
-	
         print (res)
+        self.media.play()
+        time.sleep(res['duration'])	
         return res
 
     def stop(self):
 	    self.media.stop()
         
-r = PlayMusic().play("sparks fly")
-time.sleep(r['duration'])
+r = PlayMusic().play("close to me")

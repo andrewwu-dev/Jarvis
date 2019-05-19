@@ -1,7 +1,8 @@
 import dialogflow_v2 as dialogflow
+import Intents
 
 class DialogFlow:
-        def detect_intent(text):
+        def detect_intent(self, text):
                 session_client = dialogflow.SessionsClient()
 
                 session = session_client.session_path("newagent-3a903", "1")
@@ -21,13 +22,14 @@ class DialogFlow:
                         response.query_result.intent_detection_confidence))
                 print('Fulfillment text: {}\n'.format(
                         response.query_result.fulfillment_text))
-                
-                normalizeResponse(response.query_result)
-
-        def normalizeResponse(res):
                 norm = {
-                        "entities": res.parameters,
-                        "intent": res.intent.display_name,
-                        "confidence": res.intent_detection_confidence
+                        "entities": response.query_result.parameters,
+                        "intent": response.query_result.intent.display_name,
+                        "confidence": response.query_result.intent_detection_confidence
                 }
-                print (norm)
+                return norm
+
+
+res = DialogFlow().detect_intent("Jarvis, play close to me")
+song = res['entities'].fields['song'].string_value
+Intents.intentMap[res['intent']].play(song)

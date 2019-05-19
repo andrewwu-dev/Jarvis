@@ -4,8 +4,6 @@ weather = Weather.Weather()
 playMusic = PlayMusic.PlayMusic()
 
 intentMap = {
-    "weather": weather,
-    "playMusic": playMusic
+    "WeatherInfo": weather,
+    "PlayMusic": playMusic
 }
-
-intentMap['weather']
