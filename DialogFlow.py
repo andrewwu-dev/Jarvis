@@ -25,7 +25,8 @@ class DialogFlow:
                 norm = {
                         "entities": response.query_result.parameters,
                         "intent": response.query_result.intent.display_name,
-                        "confidence": response.query_result.intent_detection_confidence
+                        "confidence": response.query_result.intent_detection_confidence,
+                        "response": response.query_result.fulfillment_text
                 }
                 return norm
 
