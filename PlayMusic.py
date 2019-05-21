@@ -1,7 +1,5 @@
-import os, json, vlc, pafy
-import google_auth_oauthlib.flow
+import vlc, pafy
 import googleapiclient.discovery
-import googleapiclient.errors
 
 class PlayMusic:
     def __init__(self):
