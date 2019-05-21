@@ -22,21 +22,28 @@ class Weather:
         
         print('initialized Weather')
 
-    def getWeather(self):
+    def callAPI(self):
         req = requests.get(url=self.url, params=self.params)
-        pp = pprint.PrettyPrinter(indent=4)
+        #pp = pprint.PrettyPrinter(indent=4)
         #pp.pprint(req.json())
         data = req.json()
         #print("-------------")
 
         weatherInfo = {
             "weather": data["weather"][0]["description"],
-            "temperature": round(data["main"]["temp"])
+            "temp": round(data["main"]["temp"])
         }
 
         #pp.pprint(weatherInfo)
 
         return weatherInfo
+    
+    def getWeather(self):
+        info = self.callAPI()
+
+        msg = "Today is " + str(info["temp"]) + " degrees and will have " + info["weather"] 
+
+        return msg
 
 if __name__ == "__main__":
     w = Weather()
