@@ -6,6 +6,7 @@ Smart Personal Assistant
 
 - Plays music on command.
 - Retrieves today's weather information.
+- Small talk.
 
 ## **Installation**
 
