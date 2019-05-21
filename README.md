@@ -1,8 +1,16 @@
-# Jarvis
 
+# **Jarvis**
 Smart Personal Assistant
 
-Plays music on command
+## **Features**
 
-pip3 install --upgrade google-api-python-client.
-pip3 install --upgrade google-auth-oauthlib google-auth-httplib2
+- Plays music on command.
+- Retrieves today's weather information.
+
+## **Installation**
+
+`pip3 install --upgrade google-api-python-client.`
+
+`pip3 install --upgrade google-auth-oauthlib google-auth-httplib2`
+
+`pip3 install geocoder`
