@@ -15,4 +15,7 @@ class Intents:
 
         elif intent == "GetWeather":
             msg = self.weather.getWeather()
-            print(msg)
+            print (msg)
+            
+        else:
+            print (data["response"])
