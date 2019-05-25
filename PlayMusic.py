@@ -7,8 +7,10 @@ class PlayMusic:
         if keyFile.mode == 'r':
             self.key = keyFile.read()
         assert self.key
+
         self.url = "https://www.youtube.com/watch?v="
         self.media = None
+        self.currentlyPlaying = False
         
     def play(self, song):
         api_service_name = "youtube"
@@ -36,9 +38,10 @@ class PlayMusic:
         youtubeUrl = self.url + res['videoId']
         vidUrl = pafy.new(youtubeUrl).getbest().url
         self.media = vlc.MediaPlayer(vidUrl)
-        print (res)
         self.media.play()
-        return res
+
+        self.currentlyPlaying = True
 
     def stop(self):
-	    self.media.stop()
+        if self.currentlyPlaying == True:
+            self.media.stop()

@@ -1,5 +1,4 @@
 #weather backend
-import geocoder
 import requests
 import pprint
 
@@ -10,17 +9,14 @@ class Weather:
             self.key = keyFile.read()
         assert self.key
 
-        self.url = "http://api.openweathermap.org/data/2.5/weather"
-        self.ip = geocoder.ip('me')
+        self.url = "https://api.apixu.com/v1/current.json?"
         
         self.params = {
-            "lat": self.ip.lat,
-            "lon": self.ip.lng,
-            "units": "metric",
-            "APPID": self.key
+            "key" : self.key,
+            "q" : "auto:ip"
         }
         
-        print('initialized Weather')
+        print('Initialized Weather Service')
 
     def callAPI(self):
         req = requests.get(url=self.url, params=self.params)
@@ -30,8 +26,8 @@ class Weather:
         #print("-------------")
 
         weatherInfo = {
-            "weather": data["weather"][0]["description"],
-            "temp": round(data["main"]["temp"])
+            "weather": data["current"]["condition"]["text"],
+            "temp": round(data["current"]["temp_c"])
         }
 
         #pp.pprint(weatherInfo)
@@ -41,7 +37,8 @@ class Weather:
     def getWeather(self):
         info = self.callAPI()
 
-        msg = "Today is " + str(info["temp"]) + " degrees and will have " + info["weather"] 
+        msg = "Today is " + str(info["temp"]) + " degrees and the weather condition for today is " 
+        msg += info["weather"] 
 
         return msg
 
