@@ -9,8 +9,13 @@ class PlayMusic:
         assert self.key
 
         self.url = "https://www.youtube.com/watch?v="
-        self.media = None
-        self.currentlyPlaying = False
+        self.instance = vlc.Instance(
+            "--quiet " +            # Dont print stuff to stdout
+            "--no-xlib " +          # Turn off XInitThreads()
+            "--avcodec-threads=0"  # Number of threads used for decoding, 0 meaning auto
+            )
+        self.mediaplayer = self.instance.media_player_new()
+
         
     def play(self, song):
         api_service_name = "youtube"
@@ -37,10 +42,9 @@ class PlayMusic:
         
         youtubeUrl = self.url + res['videoId']
         vidUrl = pafy.new(youtubeUrl).getbest().url
-        self.media = vlc.MediaPlayer(vidUrl)
-        self.media.play()
-
-        self.currentlyPlaying = True
+        self.mediaplayer.set_media(self.instance.media_new(vidUrl))
+        print (res)
+        self.mediaplayer.play()
 
     def stop(self):
         if self.currentlyPlaying == True:
