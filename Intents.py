@@ -7,7 +7,12 @@ class Intents:
         self.speaker = TextToSpeech.TextToSpeech()   
 
     def performAction(self, data):
-        intent = data["intent"]
+        intent = None
+
+        if type(data) is not str:
+            intent = data["intent"]
+        else:
+            intent = data
 
         if intent == "PlayMusic":
             song = data["entities"].fields["song"].string_value
@@ -17,6 +22,15 @@ class Intents:
         elif intent == "GetWeather":
             msg = self.weather.getWeather()
             self.speaker.say(msg)
-            
+        
+        elif intent == "StopMusic":
+            self.musicPlayer.stop()
+
+        elif intent == "PauseMusic":
+            self.musicPlayer.pause(1)
+        
+        elif intent == "ResumeMusic":
+            self.musicPlayer.pause(0)
+
         else:
             print (data["response"])

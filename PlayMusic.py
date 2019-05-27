@@ -15,6 +15,7 @@ class PlayMusic:
             "--avcodec-threads=0"  # Number of threads used for decoding, 0 meaning auto
             )
         self.mediaplayer = self.instance.media_player_new()
+        self.currentlyPlaying = False
 
         
     def play(self, song):
@@ -46,6 +47,12 @@ class PlayMusic:
         print (res)
         self.mediaplayer.play()
 
+        self.currentlyPlaying = True
+
     def stop(self):
         if self.currentlyPlaying == True:
-            self.media.stop()
+            self.mediaplayer.stop()
+
+    def pause(self, status):
+        if self.currentlyPlaying == True:
+            self.mediaplayer.set_pause(status)

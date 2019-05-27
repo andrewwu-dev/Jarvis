@@ -15,8 +15,6 @@ class Weather:
             "key" : self.key,
             "q" : "auto:ip"
         }
-        
-        print('Initialized Weather Service')
 
     def callAPI(self):
         req = requests.get(url=self.url, params=self.params)
