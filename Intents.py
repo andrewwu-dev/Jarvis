@@ -33,4 +33,4 @@ class Intents:
             self.musicPlayer.pause(0)
 
         else:
-            print (data["response"])
+            self.speaker.say(data["response"])
