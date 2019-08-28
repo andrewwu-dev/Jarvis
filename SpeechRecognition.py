@@ -4,7 +4,7 @@ class SpeechRecognition:
     def __init__(self):
         # Creates an instance of a speech config with specified subscription key and service region.
         # Replace with your own subscription key and service region (e.g., "westus").
-        speech_key, service_region = "a4d34c6569384d7da15dc9133fe8cfe3", "canadacentral"
+        speech_key, service_region = "e0b89f207fe74a91b11e0249661e0c23", "canadacentral"
         speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
         # Creates a recognizer with the given settings
         self.speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)

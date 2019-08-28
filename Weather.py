@@ -1,5 +1,6 @@
 #weather backend
 import requests
+import geocoder
 import pprint
 
 class Weather:
@@ -13,7 +14,7 @@ class Weather:
         
         self.params = {
             "key" : self.key,
-            "q" : "auto:ip"
+            "q" : geocoder.ip('me')
         }
 
     def callAPI(self):
@@ -25,7 +26,9 @@ class Weather:
 
         weatherInfo = {
             "weather": data["current"]["condition"]["text"],
-            "temp": round(data["current"]["temp_c"])
+            "temp": round(data["current"]["temp_c"]),
+            "windSpeed": data["current"]["wind_kph"],
+            "windDir": data["current"]["wind_dir"]
         }
 
         #pp.pprint(weatherInfo)
@@ -35,9 +38,27 @@ class Weather:
     def getWeather(self):
         info = self.callAPI()
 
+        direction = {
+            "W": "west",
+            "N": "north",
+            "S": "south",
+            "E": "east",
+            "NW": "north-west",
+            "NE": "north-east",
+            "SE": "south-east",
+            "SW": "south-west",
+            "NNW": "north north-west",
+            "WNW": "west north-west",
+            "WSW": "west south-west",
+            "SSW": "south south-west",
+            "SSE": "south south-east",
+            "ESE": "east south-east",
+            "ENE": "east north-east",
+            "NNE": "north north-east"
+        }
         msg = "Today is " + str(info["temp"]) + " degrees and the weather condition for today is " 
-        msg += info["weather"] 
-
+        msg += info["weather"] + ". The wind speed is " + str(info["windSpeed"]) + " kilometers per hour "
+        msg += direction[info["windDir"]]
         return msg
 
 if __name__ == "__main__":
