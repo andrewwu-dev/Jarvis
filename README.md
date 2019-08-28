@@ -4,9 +4,9 @@ Smart Personal Assistant
 
 ## **Features**
 
-- Plays music on command.
-- Retrieves today's weather information.
-- Small talk.
+- Plays music based on song name. Options to pause or stop music.
+- Retrieves today's temperature, condition, wind speed and direction.
+- Small talk features.
 
 ## **Installation**
 
