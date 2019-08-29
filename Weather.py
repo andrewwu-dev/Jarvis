@@ -32,7 +32,6 @@ class Weather:
         }
 
         #pp.pprint(weatherInfo)
-
         return weatherInfo
     
     def getWeather(self):
@@ -59,6 +58,27 @@ class Weather:
         msg = "Today is " + str(info["temp"]) + " degrees and the weather condition for today is " 
         msg += info["weather"] + ". The wind speed is " + str(info["windSpeed"]) + " kilometers per hour "
         msg += direction[info["windDir"]]
+        return msg
+
+    def getForecast(self, days):
+        req = requests.get(url="http://api-cdn.apixu.com/v1/forecast.json?", params={"key" : self.key, "q": geocoder.ip('me'), "days": int(days)})
+        data = req.json()
+
+        forecastInfo = {
+            "date": data["forecast"]["forecastday"][int(days) - 1]["date"],
+            "high": data["forecast"]["forecastday"][int(days) - 1]["day"]["maxtemp_c"],
+            "low": data["forecast"]["forecastday"][int(days) - 1]["day"]["mintemp_c"],
+            "avg": data["forecast"]["forecastday"][int(days) - 1]["day"]["avgtemp_c"],
+            "wind": data["forecast"]["forecastday"][int(days) - 1]["day"]["maxwind_kph"],
+            "precip": data["forecast"]["forecastday"][int(days) - 1]["day"]["totalprecip_mm"],
+            "condition": data["forecast"]["forecastday"][int(days) - 1]["day"]["condition"]["text"]
+        }
+        print (forecastInfo)
+        msg = "The weather condition for " + str(forecastInfo["date"]) + " is " + str(forecastInfo["condition"])
+        msg += " The average temperature is " + str(forecastInfo["avg"]) + " degrees celsius. "
+        msg += " With a high of " + str(forecastInfo["high"]) + " and low of " + str(forecastInfo["low"]) + " degrees celsius. "
+        msg += " Wind speed reaches a high of " + str(forecastInfo["wind"]) + " kilometers per hour"
+        msg += " and total precipitation is expected to be " + str(forecastInfo["precip"]) + " millimeters."
         return msg
 
 if __name__ == "__main__":

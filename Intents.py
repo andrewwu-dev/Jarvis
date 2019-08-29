@@ -9,6 +9,8 @@ class Intents:
     def performAction(self, data):
         intent = None
 
+        print (data)
+        
         if type(data) is not str:
             intent = data["intent"]
         else:
@@ -23,6 +25,10 @@ class Intents:
             msg = self.weather.getWeather()
             self.speaker.say(msg)
         
+        elif intent == "ForecastWeather":
+            msg = self.weather.getForecast(data["entities"].fields["number"].number_value)
+            self.speaker.say(msg)
+
         elif intent == "StopMusic":
             self.musicPlayer.stop()
 
