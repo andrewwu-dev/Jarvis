@@ -1,0 +1,26 @@
+Here are some things Jarvis can do:
+
+Play Music:
+    - "play 'song_name' "
+    - "Hey Jarvis, play 'song_name' "
+
+Pause Music:
+    - "pause music"
+    - "Jarvis, pause the music"
+
+Stop Music:
+    - "stop music"
+    - "Jarvis stop the music"
+
+Resume Music:
+    - "resume music"
+    - "Jarvis, resume the music"
+
+Get Current Weather Condition:
+    - "weather"
+    - "get me today's weather"
+    - "Hey Jarvis, what's the weather like?"
+
+Get Forecasted Weather Condition(1-10 days from today):
+    - "weather 1 day from now"
+    - "Jarvis, weather 5 days from now"

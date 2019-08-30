@@ -1,4 +1,4 @@
 *.js
 *.pyc
 *.json
-*.txt
+*[Key].txt

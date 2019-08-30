@@ -6,7 +6,7 @@ intents = Intents.Intents()
 dialogFlow = DialogFlow.DialogFlow()
 
 while(True):
-    input("Listening for 'ENTER' key press...")
+    input("Press 'ENTER' key to start recording, say 'help' for a list of commands...\n")
     intents.performAction("PauseMusic")
     speech = speechRecognizer.record()
 
