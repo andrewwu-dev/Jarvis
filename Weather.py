@@ -61,6 +61,9 @@ class Weather:
         return msg
 
     def getForecast(self, days):
+        if (int(days) > 10):
+            return "Sorry, forecast has a maximum range of 10 days"
+        
         req = requests.get(url="http://api-cdn.apixu.com/v1/forecast.json?", params={"key" : self.key, "q": geocoder.ip('me'), "days": int(days)})
         data = req.json()
 
